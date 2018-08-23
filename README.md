@@ -1,6 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/Toskgreg/StackOverflow-Lite_api/badge.png?branch=develop)](https://coveralls.io/github/Toskgreg/StackOverflow-Lite_api?branch=develop)
-[![Build Status](https://travis-ci.org/Toskgreg/StackOverflow-Lite_api.svg?branch=develop)](https://travis-ci.org/Toskgreg/StackOverflow-Lite_api)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d9559d4690e544f7ac013e875e77e0f1)](https://www.codacy.com/project/Toskgreg/StackOverflow-Lite_api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Toskgreg/StackOverflow-Lite_api&amp;utm_campaign=Badge_Grade_Dashboard)
+
 # StackOverflow-lite
 StackOverflow-lite is a question and answer application that provides users with the ability to ask questions and have other users answer the questions
 
@@ -30,10 +28,14 @@ Stackoverflow-lite is a platform where people can ask questions and provide answ
 
  REQUEST | ROUTE | FUNCTIONALITY
  ------- | ----- | -------------
+ POST | /api/v1/auth/signup | Registers a user
+ POST | /api/v1/auth/login | Logins a registered user
  GET | /api/v1/questions/ | Fetches all questions
  POST | /api/v1/questions/ | Posts a question
  GET | /api/v1/questions/< questionId> | Fetches a specific question
+ POST | /api/v1/Delete/questions/< questionId> | Deletes a specific question
  POST | /api/v1/questions/< question_id>/answer/ | Post an answer to a question
+ PUT | /api/v1/questions/< question_id>/answer/< answer_id>/ | Mark an answer as accepted or update answer
  POST | /api/v1/questions/< question_id>/< answer_id>/comment | Post a comment to answer
  POST | /api/v1/questions/< question_id>/< answer_id>/upvote | Upvote answer
  POST | /api/v1/questions/< question_id>/< answer_id>/downvote | Downvote  answer
@@ -49,7 +51,7 @@ Stackoverflow-lite is a platform where people can ask questions and provide answ
  
  1. Clone this repository to your local PC
 
-    ` git clone https://github.com/Toskgreg/StackOverflow-Lite_api.git `
+    ` git clone https://github.com/Toskgreg/StackOverflow-Lite-API2.git `
 
  2. Create a virtual environment to run application specific dependencies
 

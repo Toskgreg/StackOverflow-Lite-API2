@@ -41,3 +41,24 @@ class QuestionAPI(MethodView):
             return make_response(jsonify(response)), 201
         return jsonify({'message': validate_question(data)}), 406
 
+    def get(self, current_user, question_id):
+        """Method for user to view  questions"""
+        database = Database(app.config['DATABASE_URL'])
+        question_db = QuestionBbQueries()
+        if question_id:
+            query = database.fetch_by_param('questions', 'id', question_id)
+            if query:
+                question = Question(query[0], query[1], query[2], query[3], query[4])
+                response = {'id': question.question_id, "title": question.title,
+                            'description1': question.description1,
+                            "date_time": question.date_time, 'posted_by': question.posted_by}
+                return jsonify(response), 200
+            return jsonify({'msg': "Question not found "}), 404
+
+        else:
+            questions = question_db.fetch_all()
+            if questions == []:
+                return jsonify(
+                    {"msg": " There are no questions at the moment"
+                     }), 200
+            return jsonify(questions), 200

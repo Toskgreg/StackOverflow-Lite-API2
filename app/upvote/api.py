@@ -1,4 +1,5 @@
-"""This module handles the class UPVOTEApi and its post method"""
+""""
+This module handles the class UPVOTEApi and its post method
 import uuid
 from flask.views import MethodView
 from flask import jsonify
@@ -6,7 +7,7 @@ from app.models import Up_vote
 
 
 class Up(MethodView):
-    """This class-based view for UPVOTING a ANSWER."""
+    This class-based view for UPVOTING a ANSWER.
     @staticmethod
     def post(question_id, answer_id):
         '''Method for a post request'''
@@ -14,3 +15,4 @@ class Up(MethodView):
         answer_id = uuid.UUID(answer_id)
         res = Up_vote.up_vote_on_answer(question_id, answer_id)
         return jsonify({'msg': res}), 201
+""""

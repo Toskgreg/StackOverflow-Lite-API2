@@ -4,7 +4,7 @@ import os
 class Config(object):
     """Parent configuration class."""
     DEBUG = False
-    SECRET = os.getenv('SECRET') or "secret"
+    DATABASE_URL = 'postgresql://postgres:andela@localhost:5432/question_db'
 
 
 class DevelopmentConfiguration(Config):
@@ -16,7 +16,7 @@ class TestingConfiguration(Config):
     """Configurations for Testing."""
     TESTING = True
     DEBUG = True
-
+    DATABASE_URL = 'postgresql://postgres:andela@localhost:5432/test_db'
 
 class ProductionConfiguration(Config):
     """Configurations for Production."""

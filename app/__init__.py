@@ -1,24 +1,36 @@
 '''This module instanciates a flask object and creates the app'''
-from flask import Flask, jsonify
-from config import configuration
+"""Creates module and is the main application factory"""
+from flask import Flask
+from flask_cors import CORS
+from config import app_config
+from app.database import Database
+from app.error_handler import *
 
-app = Flask(__name__)
 
+def create_app(config_name):
+    """Creates the application and registers the blueprints
+        with the application
+    """
+    app = Flask(__name__)
+    CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
-def create_app(configuration_name):
-    '''creates the app and registers Blue prints'''
-    app.config.from_object(configuration[configuration_name])
+    app.config.from_object(app_config[config_name])
+ 
     from app.question.views import QUESTION_APP
+    from app.auth.views import AUTH_BLUEPRINT
     from app.answer.views import ANSWER_APP
-    from app.comment.views import COMMENT_APP
-    from app.upvote.views import UPVOTE_APP
-    from app.downvote.views import DOWNVOTE_APP
 
     # register_blueprint
+    app.register_blueprint(AUTH_BLUEPRINT)
     app.register_blueprint(QUESTION_APP)
     app.register_blueprint(ANSWER_APP)
-    app.register_blueprint(COMMENT_APP)
-    app.register_blueprint(DOWNVOTE_APP)
-    app.register_blueprint(UPVOTE_APP)
+ 
+
+    # register error handlers
+    app.register_error_handler(404, not_found)
+    app.register_error_handler(400, bad_request)
+    app.register_error_handler(500, internal_server_error)
+    app.register_error_handler(405, method_not_allowed)
 
     return app

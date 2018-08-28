@@ -62,3 +62,4 @@ class QuestionAPI(MethodView):
                     {"msg": " There are no questions at the moment"
                      }), 200
             return jsonify(questions), 200
+            

@@ -21,5 +21,6 @@ class Question:
         self.description1 = description1
         self.date_time = date_time
         self.posted_by = posted_by
+        
 
 

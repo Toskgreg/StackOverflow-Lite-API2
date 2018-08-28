@@ -72,3 +72,13 @@ class QuestionAPI(MethodView):
                     {"msg": " There are no questions at the moment"
                      }), 200
             return jsonify(questions), 200
+
+    def delete(self, current_user, question_id):
+        """Method for user to view  questions"""
+        database = Database(app.config['DATABASE_URL'])
+        question_db = QuestionBbQueries()
+        if question_id:
+            query = database.fetch_by_paramss('questions', 'id', question_id)
+            return jsonify(
+                    {"msg": " Question has been deleted."
+                     }), 200

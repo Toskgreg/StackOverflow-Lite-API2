@@ -9,3 +9,5 @@ ANSWER_APP = Blueprint('ANSWER_APP', __name__)
 ANSWER_VIEW = AnswerAPI.as_view('answer_api')
 ANSWER_APP.add_url_rule('/api/v2/questions/<question_id>/answers',
                          view_func=ANSWER_VIEW, methods=['POST', ])
+ANSWER_APP.add_url_rule('/api/v2/questions/<question_id>/answers/<answer_id>',
+                         view_func=ANSWER_VIEW, methods=['PUT', ])

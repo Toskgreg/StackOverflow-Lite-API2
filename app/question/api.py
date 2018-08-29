@@ -1,19 +1,18 @@
 """Handles questions class based views"""
 from flask.views import MethodView
 from flask import jsonify, request, make_response, current_app as app
-from app.models import Question, Answer
+from app.models import Question
 from app.auth.decoractor import token_required
-from app.validate import validate_date, validate_question
+from app.validate import validate_question
 from app.database import Database, QuestionBbQueries, AnswerBbQueries
 
 
 class QuestionAPI(MethodView):
     """A class based view to handle questions"""
     decorators = [token_required]
-
-    def post(self, current_user):
+    @staticmethod
+    def post(current_user):
         """offers a new question"""
-        database = Database(app.config['DATABASE_URL'])
         question_db = QuestionBbQueries()
         data = request.get_json()
 
@@ -37,8 +36,8 @@ class QuestionAPI(MethodView):
             }
             return make_response(jsonify(response)), 201
         return jsonify({'message': validate_question(data)}), 406
-
-    def get(self, current_user, question_id):
+    @staticmethod
+    def get(current_user, question_id):
         """Method for user to view  questions"""
         database = Database(app.config['DATABASE_URL'])
         question_db = QuestionBbQueries()
@@ -74,13 +73,12 @@ class QuestionAPI(MethodView):
                     {"msg": " There are no questions at the moment"
                      }), 200
             return jsonify(questions), 200
-
-    def delete(self, current_user, question_id):
+    @staticmethod
+    def delete(current_user, question_id):
         """Method for user to view  questions"""
         database = Database(app.config['DATABASE_URL'])
-        question_db = QuestionBbQueries()
         if question_id:
-            query = database.fetch_by_paramss('questions', 'id', question_id)
+            database.fetch_by_paramss('questions', 'id', question_id)
             return jsonify(
                 {"msg": " Question has been deleted."
                  }), 200

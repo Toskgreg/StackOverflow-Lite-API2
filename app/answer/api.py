@@ -9,8 +9,8 @@ from app.auth.decoractor import token_required
 class AnswerAPI(MethodView):
     """This class-based view for answering a question."""
     decorators = [token_required]
-
-    def post(self, current_user, question_id):
+    @staticmethod
+    def post(current_user, question_id):
         """Post method view for answering a question"""
         database = Database(app.config['DATABASE_URL'])
         answer_db = AnswerBbQueries()
@@ -31,8 +31,8 @@ class AnswerAPI(MethodView):
         else:
             return jsonify(
                 {'message': "You can't answer your own question"}), 403
-
-    def put(self, current_user, question_id, answer_id):
+    @staticmethod
+    def put(current_user, question_id, answer_id):
         """Accept an answer or update it."""
         database = Database(app.config['DATABASE_URL'])
         answer_db = AnswerBbQueries()

@@ -1,5 +1,4 @@
-import os
-import psycopg2
+
 from app import create_app
 from app.database import Database
 

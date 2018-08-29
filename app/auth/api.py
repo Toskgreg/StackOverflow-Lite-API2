@@ -12,8 +12,8 @@ from app.database import Database, UserBbQueries
 
 class RegistrationView(MethodView):
     """This class-based view registers a new user."""
-
-    def post(self):
+    @staticmethod
+    def post():
         """registers a user"""
         database = Database(app.config['DATABASE_URL'])
         user_db = UserBbQueries()
@@ -42,8 +42,8 @@ class RegistrationView(MethodView):
 
 class LoginView(MethodView):
     """This class-based view handles user login and access token generation."""
-
-    def post(self):
+    @staticmethod
+    def post():
         '''Logs in a registered user and returns a token'''
         database = Database(app.config['DATABASE_URL'])
 

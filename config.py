@@ -18,12 +18,13 @@ class TestingConfiguration(Config):
     DEBUG = True
     DATABASE_URL = 'postgresql://postgres:andela@localhost:5432/test_db'
 
+
 class ProductionConfiguration(Config):
     """Configurations for Production."""
     DEBUG = False
 
 
-configuration = {
+app_config = {
     'DEFAULT': DevelopmentConfiguration,
     'TESTING': TestingConfiguration,
     'DEVELOPMENT': DevelopmentConfiguration,

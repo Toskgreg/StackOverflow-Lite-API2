@@ -1,5 +1,4 @@
-'''This module instanciates a flask object and creates the app'''
-"""Creates module and is the main application factory"""
+"""Creates module is the main application factory"""
 from flask import Flask
 from flask_cors import CORS
 from config import app_config
@@ -16,7 +15,7 @@ def create_app(config_name):
     app.config['CORS_HEADERS'] = 'Content-Type'
 
     app.config.from_object(app_config[config_name])
- 
+
     from app.question.views import QUESTION_APP
     from app.auth.views import AUTH_BLUEPRINT
     from app.answer.views import ANSWER_APP
@@ -25,7 +24,6 @@ def create_app(config_name):
     app.register_blueprint(AUTH_BLUEPRINT)
     app.register_blueprint(QUESTION_APP)
     app.register_blueprint(ANSWER_APP)
- 
 
     # register error handlers
     app.register_error_handler(404, not_found)

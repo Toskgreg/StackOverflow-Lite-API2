@@ -25,7 +25,7 @@ class AnswerAPI(MethodView):
         question = Question(query[0], query[1], query[2], query[3], query[4])
 
         if question.qauthor != aauthor:
-            answer_db.post_answer(question_id,data ,aauthor)
+            answer_db.post_answer(question_id, data, aauthor)
             return jsonify({'msg': 'You have offered an answer' +
                             " Thank you."}), 201
         else:
@@ -66,8 +66,8 @@ class AnswerAPI(MethodView):
         if query1 is None:
             abort(404)
         answer = Answer(query1[0], query1[1], query1[2], query1[3], query1[4])
-        if answer.aauthor ==aauthor:
+        if answer.aauthor == aauthor:
             data = request.get_json()
             text1 = data['text1']
             answer_db.update_answer(answer_id, text1)
-            return jsonify ({"message":"You have updated your answer"}),201
+            return jsonify({"message": "You have updated your answer"}), 201

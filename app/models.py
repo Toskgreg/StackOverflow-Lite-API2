@@ -14,13 +14,23 @@ class User:
 class Question:
     '''  Defines a Question class'''
 
-    def __init__(self, question_id, title, description1, date_time, posted_by):
+    def __init__(self, question_id, title, description1, date_time, qauthor):
         ''' Initializes the question object'''
         self.question_id = question_id
         self.title = title
         self.description1 = description1
         self.date_time = date_time
-        self.posted_by = posted_by
-        
+        self.qauthor = qauthor
 
 
+class Answer:
+    ''' Defines the Answer class'''
+
+    def __init__(self, answer_id, text1, question_id, status,
+                 aauthor):
+
+        self.answer_id = answer_id
+        self.question_id = question_id
+        self.text1 = text1
+        self.status = status
+        self.aauthor = aauthor

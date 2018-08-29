@@ -1,5 +1,4 @@
 """This module contain functions that handle input validation"""
-from datetime import datetime
 import re
 
 
@@ -47,13 +46,3 @@ def validate_question(data):
     except KeyError:
         return "All keys are required"
 
-
-def validate_date(date_time):
-    """check that the question date and time is not past"""
-    try:
-        date_time = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
-    except ValueError:
-        return "incorrect date and time format, should be YYYY-MM-DD HH:MM:SS"
-    if date_time < datetime.now():
-        return "question cannot have a past date and time"
-    return 'valid'

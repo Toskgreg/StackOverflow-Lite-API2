@@ -58,12 +58,12 @@ class QuestionAPI(MethodView):
                     'qauthor': question.qauthor,
                     'question_answers': question_answers}
                 return jsonify(response), 200
-            elif question.qauthor == qauthor:
-                question_answers = answer_db.fetch_by_id(question_id)
-                if question_answers == []:
-                    return jsonify({"msg": "You haven't recieved any " +
+                if question.qauthor == qauthor:
+                    question_answers = answer_db.fetch_by_id(question_id)
+                    if question_answers == []:
+                        return jsonify({"msg": "You haven't recieved any " +
                                     " answers yet"}), 200
-                return jsonify(question_answers), 200
+                    return jsonify(question_answers), 200
             return jsonify({'msg': "Question not found "}), 404
 
         else:

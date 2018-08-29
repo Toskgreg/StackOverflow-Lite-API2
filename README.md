@@ -66,7 +66,7 @@ Stackoverflow-lite is a platform where people can ask questions and provide answ
     ` python run.py `
 
  2. To run tests
-    `  pytest tests/test.py `
+    `  nosetests --with-coverage --cover-package=app && coverage report `
 ## Author
 
 **Toskin Gregory**

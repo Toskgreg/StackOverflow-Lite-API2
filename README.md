@@ -14,7 +14,7 @@ Stackoverflow-lite is a platform where people can ask questions and provide answ
 
 ## Link to Stackoverflow-lite API hosted on heroku
 
-[StackOverflow-Lite_api](https://stackoverflow-lite12.herokuapp.com/api/v1/questions/)
+[StackOverflow-Lite_api](https://stackoverflowgreg.herokuapp.com)
 
 ### Tools
 

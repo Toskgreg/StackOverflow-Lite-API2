@@ -1,4 +1,4 @@
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f32c3979a1e641e78ee872c82104579f)](https://www.codacy.com/app/Toskgreg/StackOverflow-Lite-API2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Toskgreg/StackOverflow-Lite-API2&amp;utm_campaign=Badge_Grade)
 # StackOverflow-lite
 StackOverflow-lite is a question and answer application that provides users with the ability to ask questions and have other users answer the questions
 

@@ -31,6 +31,11 @@ class TestBase(unittest.TestCase):
         'title': 'What is flask',
         'description1': "Am a newbie in programmming and would love to know what flask is in python?"
     }
+    post_answer = {
+        'text1':'toppppppppppppppppp'
+    }
+
+
 
     def setUp(self):
         db = Database(
@@ -64,14 +69,14 @@ class TestBase(unittest.TestCase):
 
     def create_post_question(self):
         """ Creates a valid question to be used for tests """
-        response = self.client.post('api/v2/users/questions/',
+        response = self.client.post('api/v2/questions/',
                                     data=json.dumps(self.post_question),
                                     content_type='application/json',
                                     headers={'Authorization':
                                              self.get_token()})
         return response
 
-    def create_user(self):
+    def create_aauthor(self):
         """ Registers a user to be used for tests"""
         response = self.client.post('/api/v2/auth/register',
                                     data=json.dumps(self.user),

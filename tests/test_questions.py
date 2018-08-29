@@ -77,3 +77,25 @@ class Testquestion(TestBase):
                                    headers={'Authorization':
                                             self.get_token()})
         self.assertEqual(response.status_code, 404)
+    
+    def test_api_can_delete_question_by_id(self):
+        """Test API can fetch a single question by using it's id."""
+        response = self.client.post('/api/v2/questions/',
+                                    data=json.dumps({
+                                    'title': 'title',
+                                   'description1': "description1",
+                                   'qauthor':"qauthor"
+                                     }),
+                                    content_type='application/json',
+                                    headers={'Authorization':
+                                             self.get_token()})
+        self.assertEqual(response.status_code, 201)
+        response = self.client.get('api/v2/questions/')
+        results = json.loads(response.data.decode())
+        for question in results:
+            result = self.client.delete(
+                'api/v2/questions/1',
+                content_type='application/json',
+                                    headers={'Authorization':
+                                             self.get_token()})
+            self.assertEqual(result.status_code, 200)

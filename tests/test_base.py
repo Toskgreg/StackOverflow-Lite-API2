@@ -25,13 +25,11 @@ class TestBase(unittest.TestCase):
 
     valid_question = {
         'title': 'title',
-        'description1': "description1",
-        "date": "2018-11-12 12:49:00"
+        'description1': "description1"
     }
     post_question = {
         'title': 'What is flask',
-        'description1': "Am a newbie in programmming and would love to know what flask is in python?",
-        "date": "2019-11-12 12:49:00"
+        'description1': "Am a newbie in programmming and would love to know what flask is in python?"
     }
 
     def setUp(self):
@@ -80,7 +78,7 @@ class TestBase(unittest.TestCase):
                                     content_type='application/json')
         return response
 
-    def passenger_token(self):
+    def author_token(self):
         ''' Generates a toke to be used for tests'''
         response = self.client.post('/api/v2/auth/login',
                                     data=json.dumps({

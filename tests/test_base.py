@@ -98,4 +98,5 @@ class TestBase(unittest.TestCase):
             'postgresql://postgres:andela@localhost:5432/test_db')
         db.trancate_table("users")
         db.trancate_table("questions")
+        db.trancate_table("answers")
        

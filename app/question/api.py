@@ -2,7 +2,7 @@
 from flask.views import MethodView
 from flask import jsonify, request, make_response, current_app as app
 from app.models import Question
-from app.auth.decoractor import token_required
+from app.auth.decorator import token_required
 from app.validate import validate_question
 from app.database import Database, QuestionBbQueries, AnswerBbQueries
 

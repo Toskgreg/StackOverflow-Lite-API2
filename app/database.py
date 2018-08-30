@@ -6,7 +6,7 @@ from flask import current_app as app
 
 
 class Database:
-    """This class does all database related stuff"""
+    """This class performs database methods"""
 
     def __init__(self, database_url):
         """Initializes the connection url"""

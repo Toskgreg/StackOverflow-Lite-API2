@@ -1,9 +1,7 @@
 """Creates module is the main application factory"""
-from flask import Flask
-from flask_cors import CORS
+from flask import Flask,jsonify
 from config import app_config
 from app.database import Database
-from app.error_handler import *
 
 
 def create_app(config_name):
@@ -11,9 +9,6 @@ def create_app(config_name):
         with the application
     """
     app = Flask(__name__)
-    CORS(app)
-    app.config['CORS_HEADERS'] = 'Content-Type'
-
     app.config.from_object(app_config[config_name])
 
     from app.question.views import QUESTION_APP
@@ -26,9 +21,17 @@ def create_app(config_name):
     app.register_blueprint(ANSWER_APP)
 
     # register error handlers
-    app.register_error_handler(404, not_found)
-    app.register_error_handler(400, bad_request)
-    app.register_error_handler(500, internal_server_error)
-    app.register_error_handler(405, method_not_allowed)
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({'message': "Bad request please input all fields"}),400
+    @app.errorhandler(405)
+    def method_not_allowed(error):
+        return jsonify({'message': "Please use an appropiate request method"}),405
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return jsonify({'message': "Internal server error"}),500
+    @app.errorhandler(404)
+    def url_not_found(error):
+        return jsonify({'message': "Requested URL is invalid"}),404
 
     return app

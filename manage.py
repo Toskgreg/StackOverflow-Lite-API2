@@ -7,6 +7,6 @@ db = Database('postgres://sxeryejnkxvdyl:fe0c442231427f6b1874f34a2608f09568dcbf4
 
 if __name__ == '__main__':
     
-    db.create_database(dbname)
+    db.create_database(dbname='df6pburvodvkqn')
     db.create_tables()
 

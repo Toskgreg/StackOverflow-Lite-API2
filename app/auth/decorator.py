@@ -6,9 +6,9 @@ from app.models import User
 from app.database import Database
 
 
-def token_required(f):
+def token_required(x):
     """ Function to be decorated"""
-    @wraps(f)
+    @wraps(x)
     def decorated(*args, **kwargs):
         """creates the decorator"""
         token = None
@@ -25,6 +25,6 @@ def token_required(f):
         except:
             return jsonify({'message': 'Token is invalid!'}), 401
 
-        return f(current_user, *args, **kwargs)
+        return x(current_user, *args, **kwargs)
 
     return decorated

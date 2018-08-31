@@ -9,9 +9,9 @@ def validate_user(data):
                 or not data["password"].strip():
             return "all fields are required"
 
-        elif not re.match("^[a-zA-Z0-9_ ]*$", data["name"].strip()) or\
-                not re.match("^[a-zA-Z0-9_ ]*$", data["username"].strip()) or\
-                not re.match("^[a-zA-Z0-9_]*$", data["password"].strip()):
+        elif not re.match("^[a-zA-Z_ ]*$", data["name"].strip()) or\
+                not re.match("^[a-zA-Z0-9_]*$", data["username"].strip()) or\
+                not re.match("^[a-zA-Z0-9_@]*$", data["password"].strip()):
             return "Inputs should only contain alphanemeric characters"
         else:
             return "valid"
@@ -24,8 +24,8 @@ def validate_login(data):
     try:
         if not data["username"].strip() or not data["password"].strip():
             return "all fields are required"
-        elif not re.match("^[a-zA-Z0-9_ ]*$", data["username"].strip()) or\
-                not re.match("^[a-zA-Z0-9_]*$", data["password"].strip()):
+        elif not re.match("^[a-zA-Z0-9_]*$", data["username"].strip()) and\
+                not re.match("^[a-zA-Z0-9_@]*$", data["password"].strip()):
             return "Inputs should only contain alphanemeric characters"
         else:
             return "valid"

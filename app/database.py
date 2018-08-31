@@ -63,6 +63,10 @@ class Database:
         self.cur.execute(query)
         row = self.cur.rowcount
         return row
+    
+    def fetch_alla(self):
+        """ Fetches all question recods from the database"""
+        self.cur.execute("SELECT * FROM users ")
 
 
 class UserBbQueries(Database):

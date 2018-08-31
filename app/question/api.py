@@ -17,24 +17,16 @@ class QuestionAPI(MethodView):
         data = request.get_json()
 
         if validate_question(data) == 'valid':
-
             qauthor = current_user.username
-
             questions_query = question_db.fetch_all()
             for question in questions_query:
                 if question['title'] == data['title'] and \
                         question['description1'] == data['description1']\
                         and str(question['date_time']) == str(data['date_time']) and \
                         question['qauthor'] == current_user.username:
-                    response = {
-                        'message': 'This question already exists.',
-                    }
-                    return make_response(jsonify(response)), 409
+                    return jsonify({ 'message': 'This question already exists.'}), 409
             question_db.insert_question_data(data, qauthor)
-            response = {
-                'message': 'You offered a question successfully.',
-            }
-            return make_response(jsonify(response)), 201
+            return jsonify({'message': 'You offered a question successfully.'}), 201
         return jsonify({'message': validate_question(data)}), 406
     @staticmethod
     def get(current_user, question_id):
@@ -79,6 +71,7 @@ class QuestionAPI(MethodView):
         database = Database(app.config['DATABASE_URL'])
         if question_id:
             database.fetch_by_paramss('questions', 'id', question_id)
+            database.fetch_by_paramss('answers', 'question_id', question_id)
             return jsonify(
                 {"msg": " Question has been deleted."
                  }), 200

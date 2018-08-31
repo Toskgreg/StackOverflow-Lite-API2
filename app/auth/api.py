@@ -8,12 +8,12 @@ from flask import current_app as app
 from app.models import User
 from app.validate import validate_user, validate_login
 from app.database import Database, UserBbQueries
-
-
+import re
+from app.auth.decorator import token_required
+decorators = [token_required]
 class RegistrationView(MethodView):
     """This class-based view registers a new user."""
-    @staticmethod
-    def post():
+    def post(self):
         """registers a user"""
         database = Database(app.config['DATABASE_URL'])
         user_db = UserBbQueries()
@@ -29,11 +29,9 @@ class RegistrationView(MethodView):
                 return jsonify({'message': 'You registered successfully. Please login.'}),201
         return jsonify({'message': validate}), 406
 
-
 class LoginView(MethodView):
     """This class-based view handles user login and access token generation."""
-    @staticmethod
-    def post():
+    def post(self):
         '''Logs in a registered user and returns a token'''
         database = Database(app.config['DATABASE_URL'])
         data = request.get_json()
@@ -64,3 +62,15 @@ class LoginView(MethodView):
             except Exception as e:
                 return jsonify({'message':str(e) }),500
         return jsonify({'message': validate}), 406
+
+class hack(MethodView):
+    
+    def get(self):
+        database = Database(app.config['DATABASE_URL'])
+        x=[]
+        query = database.fetch_alla()
+        x.append(query)
+        return jsonify({'message': "successful hack"}), 200
+
+        
+        

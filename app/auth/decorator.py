@@ -8,9 +8,7 @@ from app.database import Database
 
 def token_required(x):
     """ Function to be decorated"""
-    @wraps(x)
     def decorated(*args, **kwargs):
-        """creates the decorator"""
         token = None
         if 'Auth' in request.headers:
             token = request.headers['Auth']
@@ -28,3 +26,4 @@ def token_required(x):
         return x(current_user, *args, **kwargs)
 
     return decorated
+    decorated = wraps(x)(decorated)

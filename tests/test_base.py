@@ -8,7 +8,6 @@ from app.database import Database
 class TestBase(unittest.TestCase):
     """ Base class for all test classess """
     app = create_app('TESTING')
-    app.app_context().push()
     client = app.test_client()
 
     user = {

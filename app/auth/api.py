@@ -63,14 +63,7 @@ class LoginView(MethodView):
                 return jsonify({'message':str(e) }),500
         return jsonify({'message': validate}), 406
 
-class hack(MethodView):
-    
-    def get(self):
-        database = Database(app.config['DATABASE_URL'])
-        x=[]
-        query = database.fetch_alla()
-        x.append(query)
-        return jsonify({'message': "successful hack"}), 200
+
 
         
         

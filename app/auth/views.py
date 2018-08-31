@@ -1,6 +1,6 @@
 """This module handles handles registering endponts"""
 from flask import Blueprint
-from app.auth.api import RegistrationView, LoginView,hack
+from app.auth.api import RegistrationView, LoginView
 
 AUTH_BLUEPRINT = Blueprint('auth', __name__)
 

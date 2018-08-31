@@ -72,3 +72,7 @@ Stackoverflow-lite is a platform where people can ask questions and provide answ
 ## Author
 
 **Toskin Gregory**
+
+## Credits
+ To Ruganda Mubarak for his insiteful use of tools that have helped me understand this challenge.
+ 

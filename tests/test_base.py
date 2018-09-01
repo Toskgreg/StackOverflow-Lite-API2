@@ -18,7 +18,7 @@ class TestBase(unittest.TestCase):
     }
 
     valid_user = {
-        'name': 'TestUser',
+        'name': 'Test User',
         'username': 'validuser',
         'password': 'password'
     }

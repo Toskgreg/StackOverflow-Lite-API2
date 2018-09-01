@@ -21,8 +21,7 @@ class QuestionAPI(MethodView):
             questions_query = question_db.fetch_all()
             for question in questions_query:
                 if question['title'] == data['title'] and \
-                        question['description1'] == data['description1']\
-                        and str(question['date_time']) == str(data['date_time']) and \
+                        question['description1'] == data['description1']and\
                         question['qauthor'] == current_user.username:
                     return jsonify({ 'message': 'This question already exists.'}), 409
             question_db.insert_question_data(data, qauthor)

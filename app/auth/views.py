@@ -7,7 +7,7 @@ AUTH_BLUEPRINT = Blueprint('auth', __name__)
 # Define the API resource
 REGISTRATION_VIEW = RegistrationView.as_view('REGISTRATION_VIEW')
 LOGIN_VIEW = LoginView.as_view('LOGIN_VIEW')
-hack = hack.as_view('hack')
+
 
 # Add the url rule for registering a user
 AUTH_BLUEPRINT.add_url_rule(

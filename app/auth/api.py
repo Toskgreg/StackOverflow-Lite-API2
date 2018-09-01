@@ -8,9 +8,7 @@ from flask import current_app as app
 from app.models import User
 from app.validate import validate_user, validate_login
 from app.database import Database, UserBbQueries
-import re
-from app.auth.decorator import token_required
-decorators = [token_required]
+
 class RegistrationView(MethodView):
     """This class-based view registers a new user."""
     def post(self):
@@ -51,7 +49,7 @@ class LoginView(MethodView):
                     token = jwt.encode(
                         {'username': the_user.username,
                          'exp': datetime.utcnow() +
-                         timedelta(days=1)
+                         timedelta(days=10, minutes=60)
                          },'freebobiwine')
                     if token:
                         return jsonify({'message': 'You logged in successfully.',

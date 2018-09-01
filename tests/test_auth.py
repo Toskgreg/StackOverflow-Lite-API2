@@ -55,15 +55,23 @@ class TestAuth(TestBase):
 
     def test_login_valid_credentials(self):
         """ Tests login with valid credentials """
-        self.create_valid_user()
+        """ Tests login with wrong username credentials """
         user = {
-            'username': 'validuser',  # credentials for valid user.
-            'password': 'password'
+            'name': 'right user',
+            'username': 'rightuser',
+            'password': 'rightpassword'
+        }
+        self.client.post('/api/v2/auth/signup',
+                         data=json.dumps(user),
+                         content_type='application/json')
+        user = {
+            'username': 'rightuser',  # credentials for valid user.
+            'password': 'rightpassword'
         }
         response = self.client.post('/api/v2/auth/login',
                                     data=json.dumps(user),
                                     content_type='application/json')
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 200)
 
     def test_login_invalid_characters(self):
         """ Test login with invalid characters """
@@ -130,3 +138,12 @@ class TestAuth(TestBase):
                                     content_type='application/json')
 
         self.assertEqual(response.status_code, 401)
+
+    def test_user_siginup_user_already_exissts(self):
+        """Test API can signup already_exissts"""
+
+        self.create_valid_user()
+        res = self.create_valid_user()
+        self.assertTrue(res.status_code, 409)
+        self.assertIn('User already exists. Please login.', str(res.data))
+

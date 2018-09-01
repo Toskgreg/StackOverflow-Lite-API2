@@ -8,11 +8,12 @@ from app.database import Database
 class TestBase(unittest.TestCase):
     """ Base class for all test classess """
     app = create_app('TESTING')
+    app.app_context().push()
     client = app.test_client()
 
-    user = {
-        'name': ' name',
-        'username': 'namet',
+    passenger = {
+        'name': 'passenger name',
+        'username': 'passenger',
         'password': 'password'
     }
 
@@ -23,18 +24,13 @@ class TestBase(unittest.TestCase):
     }
 
     valid_question = {
-        'title': 'title',
-        'description1': "description1"
+        'title': 'origin',
+        'description1': "destination"
     }
     post_question = {
-        'title': 'What is flask',
-        'description1': "Am a newbie in programmming and would love to know what flask is in python?"
+        'title': 'kampala',
+        'description1': "destination"
     }
-    post_answer = {
-        'text1':'toppppppppppppppppp'
-    }
-
-
 
     def setUp(self):
         db = Database(
@@ -44,7 +40,7 @@ class TestBase(unittest.TestCase):
 
     def create_valid_user(self):
         """ Registers a user to be used for tests"""
-        response = self.client.post('/api/v2/auth/register',
+        response = self.client.post('/api/v2/auth/signup',
                                     data=json.dumps(self.valid_user),
                                     content_type='application/json')
         return response
@@ -59,10 +55,10 @@ class TestBase(unittest.TestCase):
 
     def create_valid_question(self):
         """ Creates a valid question to be used for tests """
-        response = self.client.post('api/v2/users/questions/',
+        response = self.client.post('api/v2/questions/',
                                     data=json.dumps(self.valid_question),
                                     content_type='application/json',
-                                    headers={'Authorization':
+                                    headers={'Auth':
                                              self.get_token()})
         return response
 
@@ -71,18 +67,18 @@ class TestBase(unittest.TestCase):
         response = self.client.post('api/v2/questions/',
                                     data=json.dumps(self.post_question),
                                     content_type='application/json',
-                                    headers={'Authorization':
+                                    headers={'Auth':
                                              self.get_token()})
         return response
 
-    def create_aauthor(self):
+    def create_author(self):
         """ Registers a user to be used for tests"""
-        response = self.client.post('/api/v2/auth/register',
-                                    data=json.dumps(self.user),
+        response = self.client.post('/api/v2/auth/signup',
+                                    data=json.dumps(self.passenger),
                                     content_type='application/json')
         return response
 
-    def author_token(self):
+    def passenger_token(self):
         ''' Generates a toke to be used for tests'''
         response = self.client.post('/api/v2/auth/login',
                                     data=json.dumps({
@@ -98,4 +94,3 @@ class TestBase(unittest.TestCase):
         db.trancate_table("users")
         db.trancate_table("questions")
         db.trancate_table("answers")
-       

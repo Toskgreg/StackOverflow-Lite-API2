@@ -1,6 +1,7 @@
 """Creates module is the main application factory"""
 from flask import Flask,jsonify
 from config import app_config
+from flask_cors import CORS
 from app.database import Database
 
 
@@ -9,6 +10,8 @@ def create_app(config_name):
         with the application
     """
     app = Flask(__name__)
+    CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
     app.config.from_object(app_config[config_name])
 
     from app.question.views import QUESTION_APP

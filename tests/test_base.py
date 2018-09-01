@@ -11,9 +11,9 @@ class TestBase(unittest.TestCase):
     app.app_context().push()
     client = app.test_client()
 
-    passenger = {
-        'name': 'passenger name',
-        'username': 'passenger',
+    author = {
+        'name': 'author name',
+        'username': 'author',
         'password': 'password'
     }
 
@@ -24,12 +24,12 @@ class TestBase(unittest.TestCase):
     }
 
     valid_question = {
-        'title': 'origin',
-        'description1': "destination"
+        'title': 'title',
+        'description1': "description"
     }
     post_question = {
-        'title': 'kampala',
-        'description1': "destination"
+        'title': 'title',
+        'description1': "description"
     }
 
     def setUp(self):
@@ -46,7 +46,7 @@ class TestBase(unittest.TestCase):
         return response
 
     def get_token(self):
-        ''' Generates a toke to be used for tests'''
+        ''' Generates a token to be used for tests'''
         response = self.client.post('/api/v2/auth/login',
                                     data=json.dumps(self.valid_user),
                                     content_type='application/json')
@@ -74,15 +74,15 @@ class TestBase(unittest.TestCase):
     def create_author(self):
         """ Registers a user to be used for tests"""
         response = self.client.post('/api/v2/auth/signup',
-                                    data=json.dumps(self.passenger),
+                                    data=json.dumps(self.author),
                                     content_type='application/json')
         return response
 
-    def passenger_token(self):
-        ''' Generates a toke to be used for tests'''
+    def author_token(self):
+        ''' Generates a token to be used for tests'''
         response = self.client.post('/api/v2/auth/login',
                                     data=json.dumps({
-                                        'username': 'passenger',
+                                        'username': 'author',
                                         'password': 'password'}),
                                     content_type='application/json')
         data = json.loads(response.data.decode())
